@@ -8,6 +8,8 @@ async function getData() {
     allCoffee = data
     showProducts(data)
     showProductsWithPic(data)
+    console.log(data);
+    
 }
 getData()
 
@@ -23,8 +25,8 @@ function showProducts(data) {
         `
         elm.children.map(item=>{
             code += `
-            <div>
-                <a href="" class="text-gray-400" >${item.name}</a>
+            <div  onclick="showCoffeeTypes('${item.id}', '${elm.name}')">
+                <a  class="text-gray-400" >${item.name}</a>
             </div>
             `
         })
@@ -39,16 +41,17 @@ function showProductsWithPic(data) {
       
         code += `
             <div class="mb-8">
-                <h3 class="font-bold text-2xl mb-4">${elm.name}</h3>
+                <h3  class="font-bold text-2xl mb-4">${elm.name}</h3>
                 <div class="grid grid-cols-2 gap-4">
         `;
-        elm.children.map(item => {
+        elm.children.map(item => { 
             code += `
-                <div onclick="showCoffeeTypes('${item.id}', '${elm.name}')" class="flex items-center gap-2">
+                <div onclick="showCoffeeTypes('${item.id}', '${elm.name}')" class="flex flex-col items-center gap-2">
                     <img class="w-14 h-14 rounded-full object-contain" src="${item.categoryImageURL}" alt="">
                     <a  class="text-lg font-medium">${item.name}</a>
                 </div>
             `;
+            // onclick id number edir ona gore toString yerine onclikcde etrafina '' yaziriq.
             
     console.log(item.id)
         });
@@ -80,9 +83,9 @@ function showCoffeeTypes(id, name) {
          `;
          elm.products.map( last => {
             code += `
-            <div  class="flex items-center gap-2">
+            <div onclick="window.location.href='details.htm?displayOrder=${last.displayOrder}'"  class="flex flex-col items-center gap-2">
                 <img class="w-14 h-14 rounded-full object-contain" src="${last.imageURL}" alt="">
-                <a  class="text-lg font-medium">${last.name}</a>
+                <a class="text-lg font-medium">${last.name}</a>
             </div>
         `;
          }

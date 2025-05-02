@@ -83,7 +83,7 @@ function showCoffeeTypes(id, name) {
          `;
          elm.products.map( last => {
             code += `
-            <div onclick="window.location.href='details.htm?displayOrder=${last.displayOrder}'"  class="flex flex-col items-center gap-2">
+            <div onclick="window.location.href='details.htm?productNumber=${last.productNumber}'"  class="flex flex-col items-center gap-2">
                 <img class="w-14 h-14 rounded-full object-contain" src="${last.imageURL}" alt="">
                 <a class="text-lg font-medium">${last.name}</a>
             </div>

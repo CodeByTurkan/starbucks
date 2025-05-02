@@ -1,6 +1,9 @@
 const menus = document.getElementById('menus')
 const menuWithPic = document.getElementById('menuWithPic')
 const coffeeTypes = document.getElementById('coffeeTypes')
+const loader = document.getElementById('loader')
+const showCards = document.getElementById('showCards')
+
 let allCoffee = []
 async function getData() {
     const res = await fetch('https://starbucks-data-nine.vercel.app/menus')
@@ -9,6 +12,8 @@ async function getData() {
     showProducts(data)
     showProductsWithPic(data)
     console.log(data);
+    loader.style.display = 'none';
+    showCards.style.display = 'block';
 }
 getData()
 
@@ -42,13 +47,18 @@ function showProductsWithPic(data) {
             <div class="mb-8 ">
                
                 <h3  class="font-bold text-2xl ">${elm.name}</h3>
-                 <hr/ class="border-b my-6 border-gray-200">
+                 <hr class="border-b my-6 border-gray-200"/>
                 <div class="grid grid-cols-1 min-[768px]:grid-cols-2 gap-4">
         `;
         elm.children.map(item => { 
             code += `
+
+           
+
                 <div onclick="showCoffeeTypes('${item.id}', '${elm.name}')" class="flex items-center gap-3">  
-                    <img class="w-20 h-20 lg:w-30 lg:h-30 lg:rounded-full  rounded-full " src="${item.categoryImageURL}" alt="">
+                    <div class="w-20 h-20 lg:w-30 lg:h-30 lg:rounded-full  rounded-full overflow-hidden flex items-center justify-center">
+                         <img class="object-cover scale-[1.8]" src="${item.categoryImageURL}" alt="">
+                    </div>
                     <a  class="text-lg font-medium">${item.name}</a>
                 </div>
             `;
@@ -79,14 +89,16 @@ function showCoffeeTypes(id, name) {
          `
          <div class="mb-8">
                 <h3 class="font-bold text-2xl mb-4">${elm.name}</h3>
-                 <hr/ class="border-b my-6 border-gray-200">
-                <div class="grid grid-cols-2 min-[768px]:grid-cols-4 lg:grid-cols-3 gap-4">
+                 <hr class="border-b my-6 border-gray-200"/>
+                <div class="grid grid-cols-2 min-[768px]:grid-cols-4 min-[1024px]:grid-cols-3  min-[1280px]:grid-cols-4 gap-4">
         
          `;
          elm.products.map( last => {
             code += `
             <div onclick="window.location.href='details.htm?productNumber=${last.productNumber}'"  class="flex flex-col items-center gap-3">
-                <img class="w-20 h-20 lg:w-30 lg:h-30 lg:rounded-full  rounded-full " src="${last.imageURL}" alt="">
+                 <div class="w-20 h-20 lg:w-30 lg:h-30 lg:rounded-full  rounded-full overflow-hidden flex items-center justify-center">
+                         <img class="object-cover scale-[1.8]" src="${last.imageURL}" alt="">
+                    </div>
                 <a class="text-lg font-medium">${last.name}</a>
             </div>
         `;
@@ -147,3 +159,18 @@ function closeMenu() {
     xBtn.classList.add('hidden')
 }
 
+
+// modal
+const shoppingModal = document.getElementById('shoppingModal')
+const backdrop = document.getElementById('backdrop')
+
+
+function openModal() {
+    shoppingModal.classList.remove('hidden');
+    backdrop.classList.remove('hidden');
+  }
+
+  function closeModal() {
+    backdrop.classList.add('hidden');
+    shoppingModal.classList.add('hidden');
+  }

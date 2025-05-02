@@ -40,7 +40,7 @@
         <!-- Mobile Menu -->
             <div id="mobileMenu" class="fixed top-[64px] right-0 w-1/2 h-full bg-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg min-[787px]:hidden">
                 <ul class="flex flex-col gap-6 p-6 text-base font-semibold">
-                <li><a href="" class="hover:text-[#006241]">Menu</a></li>
+                <li><a href="index.htm" class="hover:text-[#006241]">Menu</a></li>
                 <li><a href="" class="hover:text-[#006241]">Rewards</a></li>
                 <li><a href="" class="hover:text-[#006241]">Gift Cards</a></li>
                 </ul>
@@ -53,29 +53,76 @@
                     </div>
                 </div>
             </div>
+
+        
     </header>
     <main >
-        <div class="w-[85%] mx-auto">
-            <ul class="flex items-center gap-7 text-sm p-4">
-                <li><a href="" class="border-b pb-1">Menu</a></li>
-                <li><a href="">Featured</a></li>
-                <li><a href="">Previous</a></li>
-                <li><a href="">Favorites</a></li>
-            </ul>
-        </div>
-        <div class="bg-white shadow-lg border-y-1 border-gray-200" >
-            <div class="w-[85%] mx-auto flex p-4 ">
-                <div id="menus" class="hidden lg:flex lg:flex-col gap-4">
-                   
+        <!-- loader -->
+         <div id="loader" class="flex justify-center  h-screen">
+            <img src="img/loading[1].svg " alt="Loading" class="w-15 h-15">
+        </div> 
+
+        <div id="showCards">
+             <!-- fixed basket -->
+            <div class="bg-[#1e3932] flex items-center justify-around gap-6 p-5 fixed z-100 bottom-0 w-full">
+                <div class="text-white">
+                    <select name="" id=""><option value="">For item availability, choose a store.</option></select>
+                    <hr class="border-b my-2 border-gray-200"/>
                 </div>
-                <div id="menuWithPic" class=" gap-3 p-4">
-                    
-                </div>
-                <div id="coffeeTypes" class="gap-3 p-4">
-                    
+                <div  onclick="openModal()" class="text-[#00A862] relative">
+                    <i class="fa-solid fa-bag-shopping fa-2xl"></i>
+                    <span id="totalCount" class="text-white absolute right-2.75 top-1 text-base font-semibold">1</span>
                 </div>
             </div>
+            <!-- modal -->
+            <div id="modal">
+                <div id="backdrop" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden" onclick="closeModal()"></div>
+                <!-- you can write onclick to backgorund to close modal or in js with windows code -->
+                
+                <div id="shoppingModal" class="fixed left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-2xl p-6 shadow-xl z-50 hidden">
+                    <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Shopping Cart</h2>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+                    </div>
+                    <div class="space-y-4 max-h-60 overflow-y-auto">
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <div>
+                        <p id="coffeeName" class="font-medium text-gray-800">Cold Brew Coffee</p>
+                        <p class="text-sm text-gray-500"> Count: <span id="count"></span></p>
+                        </div>
+                        </div>
+                    </div>
+                    <button onclick="closeModal()" class="w-full mt-6 bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-lg font-semibold">
+                    Checkout
+                    </button>
+                </div>
+            </div>
+        
+                <div class="w-[85%] mx-auto">
+                    <ul class="flex items-center gap-7 text-sm p-4">
+                        <li><a href="" class="border-b pb-1">Menu</a></li>
+                        <li><a href="">Featured</a></li>
+                        <li><a href="">Previous</a></li>
+                        <li><a href="">Favorites</a></li>
+                    </ul>
+                </div>
+                <div class="bg-white shadow-lg border-y-1 border-gray-200" >
+                    <div class="w-[85%] mx-auto flex p-4 ">
+                       
+                        <div id="menus" class="hidden lg:flex lg:flex-col gap-4">
+                           
+                        </div>
+                        <div id="menuWithPic" class=" gap-3 p-4">
+                            
+                        </div>
+                        <div id="coffeeTypes" class="gap-3 p-4">
+                            
+                        </div>
+                    </div>
+                </div>
         </div>
+      
+       
     </main>
     <footer class="py-8">
         <nav class="px-4">

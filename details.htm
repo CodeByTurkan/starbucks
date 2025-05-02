@@ -15,7 +15,7 @@
                 <img class="w-10 sm:w-12 md:w-12 " src="img/starbucks.svg" alt="">
                 <!-- left menu -->
                 <ul class="hidden min-[787px]:flex items-center gap-8 font-bold text-sm tracking-widest ">
-                    <li><a href="index.htm" class="hover:text-[#006241]">MENU</a></li>
+                    <li><a href="menu.htm" class="hover:text-[#006241]">MENU</a></li>
                     <li><a href="" class="hover:text-[#006241]">REWARDS</a></li>
                     <li><a href=""class="hover:text-[#006241]">GIFTCARDS</a></li>
                  </ul>
@@ -40,7 +40,7 @@
         <!-- Mobile Menu -->
             <div id="mobileMenu" class="fixed top-[64px] right-0 w-1/2 h-full bg-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg min-[787px]:hidden">
                 <ul class="flex flex-col gap-6 p-6 text-base font-semibold">
-                <li><a href="" class="hover:text-[#006241]">Menu</a></li>
+                <li><a href="menu.htm" class="hover:text-[#006241]">Menu</a></li>
                 <li><a href="" class="hover:text-[#006241]">Rewards</a></li>
                 <li><a href="" class="hover:text-[#006241]">Gift Cards</a></li>
                 </ul>
@@ -55,16 +55,83 @@
             </div>
     </header>
     <main>
+        <!-- loader -->
+        <div id="loader" class="flex justify-center  h-screen">
+            <img src="img/loading[1].svg" alt="Loading" class="w-15 h-15">
+        </div> 
+        <div id="showCards">
+             <!-- fixed basket -->
+        <div class="bg-[#1e3932] flex items-center justify-around gap-6 p-5 fixed z-100 bottom-0 w-full">
+            <div class="text-white">
+                <select name="" id=""><option value="">For item availability, choose a store.</option></select>
+                <hr class="border-b my-2 border-gray-200"/>
+            </div>
+            <div  onclick="openModal()" class="text-[#00A862] relative">
+                <i class="fa-solid fa-bag-shopping fa-2xl"></i>
+                <span id="totalCount" class="text-white absolute right-2.75 top-1 text-base font-semibold">1</span>
+            </div>
+        </div>
+        <!-- modal -->
+        <div id="modal">
+            <div id="backdrop" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden" onclick="closeModal()"></div>
+            <!-- you can write onclick to backgorund to close modal or in js with windows code -->
+            
+            <div id="shoppingModal" class="fixed left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-2xl p-6 shadow-xl z-50 hidden">
+                <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800">Shopping Cart</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+                </div>
+                <div class="space-y-4 max-h-60 overflow-y-auto">
+                <div class="flex justify-between items-center border-b pb-2">
+                    <div>
+                    <p id="coffeeName" class="font-medium text-gray-800">Cold Brew Coffee</p>
+                    <p class="text-sm text-gray-500"> Count: <span id="count"></span></p>
+                    </div>
+                </div>
+                </div>
+                <button onclick="closeModal()" class="w-full mt-6 bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-lg font-semibold">
+                Checkout
+                </button>
+            </div>
+        </div>
+
+        <!-- add to order -->
+         <button onclick="addProduct()" class="bg-[#00754A] px-4 py-3 rounded-full shadow-2xl text-white text-bold text-xl fixed bottom-30 right-10">
+           Add to Order
+         </button>
+
         <div class="bg-white">
             <div class="w-[85%] mx-auto p-4">
                 <!-- Content area for product details -->
             </div>
         </div>
         <div class="bg-[#1F3933] p-4">
-            <div id="details" class="w-[85%] mx-auto flex">
+            <div id="details" class="bg-[#1F3933] w-full">
                 <!-- Product details will be inserted here -->
             </div>
         </div>
+        <div class="mt-9 p-10 bg-[#1e3932] flex justify-center  text-white/70">
+            <div class="w-[80%] min-[768px]:w-[60%]">
+                <span class="inline-block border border-yellow-500 text-yellow-400  px-3 py-1 rounded-full font-medium">
+                    100★ item
+                  </span>
+                  <p class=" py-4">Notes of bright citrus and toasted almond.</p>
+                  <p >
+                    Starbucks® Sunsera Blend™ is crafted for lovers of balanced, smooth, flavorful, easy-drinking coffee—hot or iced, black or with creamer. Just as the name greets the sun, the coffee itself, a blend of semi-washed and sun-dried Brazilian and washed Colombian beans, is shaped by it.
+                  </p>
+                  <p class="font-semibold py-4">
+                    <span>5 calories, 0g sugar, 0g fat</span>
+                    <span class="ml-1 inline-block align-middle text-xs cursor-help" title="Based on standard recipe.">ℹ️</span>
+                  </p>
+                  <button class="mt-2 border border-white text-white font-semibold px-4 py-1.5 rounded-full hover:bg-white hover:text-[#1e3932] transition">
+                    Full nutrition & ingredients list
+                  </button>
+            </div>
+            <div class="min-[768px]:w-[40%]"></div>
+               
+        </div>
+        </div>
+       
     </main>
     <footer class="py-8">
         <nav class="px-4">

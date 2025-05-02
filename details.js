@@ -36,3 +36,52 @@ function searchProduct(data) {
     else { code = '<p>No Product Found!</p>'}
     details.innerHTML = code
 }
+
+
+
+
+
+// accordion
+let open = false;
+function openAccordion(id, elm, icon) {
+    const element = document.getElementById(id);
+    const liId = document.getElementById(elm)
+    const iconId = document.getElementById(icon)
+    if (open) {
+        element.style.maxHeight = "0px";
+        iconId.style.transform = "rotate(0deg)";
+    } else {
+        element.style.maxHeight = element.scrollHeight + "px"; // dynamic height
+        liId.classList.remove('pb-10')
+        liId.classList.add('pb-5')
+        iconId.style.transform = "rotate(180deg)";
+
+    }
+
+     open = !open;
+}
+
+// menu
+const mobileMenu = document.getElementById('mobileMenu');
+const menuBtn = document.getElementById('menuBtn');
+const xBtn = document.getElementById('xBtn');
+
+
+function showMenu() {
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenu.classList.add('translate-x-0');
+    menuBtn.classList.add('hidden')
+    xBtn.classList.remove('hidden')
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+    menuBtn.classList.remove('hidden')
+    xBtn.classList.add('hidden')
+}

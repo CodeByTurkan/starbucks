@@ -9,7 +9,6 @@ async function getData() {
     showProducts(data)
     showProductsWithPic(data)
     console.log(data);
-    
 }
 getData()
 
@@ -18,15 +17,12 @@ function showProducts(data) {
     data.map(elm => {
         code += 
         `
-         <div>
             <h3 class="font-bold text-lg">${elm.name}</h3>
-        </div>
-       
         `
         elm.children.map(item=>{
             code += `
-            <div  onclick="showCoffeeTypes('${item.id}', '${elm.name}')">
-                <a  class="text-gray-400" >${item.name}</a>
+            <div onclick="showCoffeeTypes('${item.id}', '${elm.name}')">
+                <a  class="text-gray-600 " >${item.name}</a>
             </div>
             `
         })
@@ -35,19 +31,24 @@ function showProducts(data) {
     menus.innerHTML = code
 }
 
+
+//<h1 class = "text-3xl mb-8 font-bold">Menu</h1>
+
 function showProductsWithPic(data) {
     let code = '';
     data.map(elm => {
       
         code += `
-            <div class="mb-8">
-                <h3  class="font-bold text-2xl mb-4">${elm.name}</h3>
-                <div class="grid grid-cols-2 gap-4">
+            <div class="mb-8 ">
+               
+                <h3  class="font-bold text-2xl ">${elm.name}</h3>
+                 <hr/ class="border-b my-6 border-gray-200">
+                <div class="grid grid-cols-1 min-[768px]:grid-cols-2 gap-4">
         `;
         elm.children.map(item => { 
             code += `
-                <div onclick="showCoffeeTypes('${item.id}', '${elm.name}')" class="flex flex-col items-center gap-2">
-                    <img class="w-14 h-14 rounded-full object-contain" src="${item.categoryImageURL}" alt="">
+                <div onclick="showCoffeeTypes('${item.id}', '${elm.name}')" class="flex items-center gap-3">  
+                    <img class="w-20 h-20 lg:w-30 lg:h-30 lg:rounded-full  rounded-full " src="${item.categoryImageURL}" alt="">
                     <a  class="text-lg font-medium">${item.name}</a>
                 </div>
             `;
@@ -78,13 +79,14 @@ function showCoffeeTypes(id, name) {
          `
          <div class="mb-8">
                 <h3 class="font-bold text-2xl mb-4">${elm.name}</h3>
-                <div class="grid grid-cols-2 gap-4">
+                 <hr/ class="border-b my-6 border-gray-200">
+                <div class="grid grid-cols-2 min-[768px]:grid-cols-4 lg:grid-cols-3 gap-4">
         
          `;
          elm.products.map( last => {
             code += `
-            <div onclick="window.location.href='details.htm?productNumber=${last.productNumber}'"  class="flex flex-col items-center gap-2">
-                <img class="w-14 h-14 rounded-full object-contain" src="${last.imageURL}" alt="">
+            <div onclick="window.location.href='details.htm?productNumber=${last.productNumber}'"  class="flex flex-col items-center gap-3">
+                <img class="w-20 h-20 lg:w-30 lg:h-30 lg:rounded-full  rounded-full " src="${last.imageURL}" alt="">
                 <a class="text-lg font-medium">${last.name}</a>
             </div>
         `;
@@ -95,11 +97,53 @@ function showCoffeeTypes(id, name) {
          </div>
      </div>
  `;
-         
-       
-       
     });
 
     coffeeTypes.innerHTML = code;
+}
+
+// accordion
+let open = false;
+function openAccordion(id, elm, icon) {
+    const element = document.getElementById(id);
+    const liId = document.getElementById(elm)
+    const iconId = document.getElementById(icon)
+    if (open) {
+        element.style.maxHeight = "0px";
+        iconId.style.transform = "rotate(0deg)";
+    } else {
+        element.style.maxHeight = element.scrollHeight + "px"; // dynamic height
+        liId.classList.remove('pb-10')
+        liId.classList.add('pb-5')
+        iconId.style.transform = "rotate(180deg)";
+
+    }
+
+     open = !open;
+}
+
+// menu
+const mobileMenu = document.getElementById('mobileMenu');
+const menuBtn = document.getElementById('menuBtn');
+const xBtn = document.getElementById('xBtn');
+
+
+function showMenu() {
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenu.classList.add('translate-x-0');
+    menuBtn.classList.add('hidden')
+    xBtn.classList.remove('hidden')
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+    menuBtn.classList.remove('hidden')
+    xBtn.classList.add('hidden')
 }
 

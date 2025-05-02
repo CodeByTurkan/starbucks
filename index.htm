@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
  </head>
  <body>
-    <header>  
-        <nav class="shadow-lg bg-white flex items-center  justify-between p-4 sm:p-4 md:p-6 lg:px-10">
-            <div class="flex items-center gap-8">
+    <header >
+        <nav id="desktopMenu" class="shadow-lg bg-white flex items-center  justify-between p-4 sm:p-4 md:p-6 lg:px-10">
+            <div class="flex items-center gap-6">
                 <!-- logo -->
                 <img class="w-10 sm:w-12 md:w-12 " src="img/starbucks.svg" alt="">
                 <!-- left menu -->
                 <ul class="hidden min-[787px]:flex items-center gap-8 font-bold text-sm tracking-widest ">
-                    <li><a href="menu.htm" class="hover:text-[#006241]">MENU</a></li>
+                    <li><a href="index.htm" class="hover:text-[#006241]">MENU</a></li>
                     <li><a href="" class="hover:text-[#006241]">REWARDS</a></li>
                     <li><a href=""class="hover:text-[#006241]">GIFTCARDS</a></li>
                  </ul>
@@ -33,9 +33,27 @@
                 </div>
             </div>
             <!-- menu -->
-            <div class="block min-[787px]:hidden"><i class=" fa-solid fa-bars fa-lg text-gray-500 mx-4"></i>
+            <div   class="block min-[787px]:hidden">
+                <div onclick="showMenu()" id="menuBtn"><i  class=" fa-solid fa-bars fa-lg text-gray-500 mx-4"></i></div>
+                <button onclick="closeMenu()" id="xBtn" class="hidden text-2xl font-bold text-gray-700">&times;</button>
             </div>
         </nav>
+        <!-- Mobile Menu -->
+            <div id="mobileMenu" class="fixed top-[64px] right-0 w-1/2 h-full bg-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg min-[787px]:hidden">
+                <ul class="flex flex-col gap-6 p-6 text-base font-semibold">
+                <li><a href="" class="hover:text-[#006241]">Menu</a></li>
+                <li><a href="" class="hover:text-[#006241]">Rewards</a></li>
+                <li><a href="" class="hover:text-[#006241]">Gift Cards</a></li>
+                </ul>
+                <div class="flex flex-col items-start gap-4 p-6">
+                    <a href="" class="px-5 py-2 border rounded-full text-sm font-semibold w-full text-center">Sign in</a>
+                    <a href="" class="px-5 py-2 bg-black text-white rounded-full text-sm font-semibold w-full text-center">Join now</a>
+                    <div class="flex items-center gap-2 mt-4">
+                        <i class="fa-solid fa-location-dot text-gray-700"></i>
+                        <p class="text-sm font-semibold">Find a store</p>
+                    </div>
+                </div>
+            </div>
     </header>
     <main>
         <div class="my-8 min-[787px]:flex bg-[#32462F]  w-full ">
@@ -225,7 +243,30 @@
              open = !open;
         }
 
+        // menu
+const mobileMenu = document.getElementById('mobileMenu');
+const menuBtn = document.getElementById('menuBtn');
+const xBtn = document.getElementById('xBtn');
 
+
+function showMenu() {
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenu.classList.add('translate-x-0');
+    menuBtn.classList.add('hidden')
+    xBtn.classList.remove('hidden')
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+    menuBtn.classList.remove('hidden')
+    xBtn.classList.add('hidden')
+}
     </script>
  </body>
  </html>

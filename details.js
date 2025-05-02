@@ -115,28 +115,85 @@ function openModal() {
 
 
 
-//   ?????????????????????? basket
+// basket
 let productInCart = null;
 
-function addProduct() {
-  if (!findProduct) return;
-
-  if (!productInCart) {
-    // First time adding the product
-    productInCart = {
-      name: findProduct.name,
-      count: 1
-    };
-  } else {
-    // Product already in cart — increase only count
-    productInCart.count++;
+function getCart() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
   }
-
-  // Update the modal content
-  coffeeName.textContent = productInCart.name;
-  count.textContent = productInCart.count;
-
-  // Update the total basket count
-  totalCount.textContent = productInCart.count;
-}
+  
+  function saveCart(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  
+  function addProduct() {
+    if (!findProduct) return;
+  
+    let cart = getCart();
+    const existingProduct = cart.find(p => p.name === findProduct.name);
+  
+    if (existingProduct) {
+      existingProduct.count++;
+    } else {
+      cart.push({ name: findProduct.name, count: 1 });
+    }
+  
+    saveCart(cart);
+    renderCart();
+  }
+  
+  function changeCount(name, delta) {
+    let cart = getCart();
+    const product = cart.find(p => p.name === name);
+  
+    if (product) {
+      product.count += delta;
+      if (product.count <= 0) {
+        // Remove if count goes to 0
+        cart = cart.filter(p => p.name !== name);
+      }
+    }
+  
+    saveCart(cart);
+    renderCart();
+  }
+  
+  function deleteProduct(name) {
+    let cart = getCart().filter(p => p.name !== name);
+    saveCart(cart);
+    renderCart();
+  }
+  
+  function renderCart() {
+    const modalBody = document.querySelector(".space-y-4");
+    const cart = getCart();
+    modalBody.innerHTML = "";
+  
+    let total = 0;
+  
+    cart.forEach(product => {
+      total += product.count;
+  
+      const div = document.createElement("div");
+      div.className = "flex justify-between items-center border-b pb-2";
+      div.innerHTML = `
+        <div>
+          <p class="font-medium text-gray-800">${product.name}</p>
+          <p class="text-sm text-gray-500">
+            Count: <span>${product.count}</span>
+          </p>
+        </div>
+        <div class="flex gap-2 items-center">
+          <button onclick="changeCount('${product.name}', -1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
+          <button onclick="changeCount('${product.name}', 1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
+          <button onclick="deleteProduct('${product.name}')" class="text-red-500 text-xl hover:text-red-700">&times;</button>
+        </div>
+      `;
+      modalBody.appendChild(div);
+    });
+  
+    totalCount.textContent = total;
+  }
+  
+  renderCart()
 

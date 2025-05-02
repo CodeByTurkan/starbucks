@@ -15,6 +15,7 @@ async function getData() {
     loader.style.display = 'none';
     showCards.style.display = 'block';
 }
+
 getData()
 
 function showProducts(data) {
@@ -159,18 +160,3 @@ function closeMenu() {
     xBtn.classList.add('hidden')
 }
 
-
-// modal
-const shoppingModal = document.getElementById('shoppingModal')
-const backdrop = document.getElementById('backdrop')
-
-
-function openModal() {
-    shoppingModal.classList.remove('hidden');
-    backdrop.classList.remove('hidden');
-  }
-
-  function closeModal() {
-    backdrop.classList.add('hidden');
-    shoppingModal.classList.add('hidden');
-  }
